@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     parameters {
+        string(
+            name: 'BRANCH',
+            defaultValue: 'main',
+            description: 'Branch to build'
+        )
         choice(
             name: 'ACTION',
             choices: ['plan', 'apply'],
@@ -11,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ygminds73/Terraform-Automation.git']])
+                checkout scmGit(branches: [[name: "*/${params.BRANCH}"]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Dnyaneshwar1702/Terraform-Automation.git']])
             }
         }
     
